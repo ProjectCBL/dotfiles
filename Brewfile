@@ -1,0 +1,66 @@
+tap "homebrew/cask-versions"
+tap "homebrew/services"
+tap "anomalyco/tap"
+tap "mobile-dev-inc/tap"
+tap "ngrok/ngrok"
+tap "stripe/stripe-cli"
+
+# Language runtimes are managed by mise:
+# bun, elixir, erlang, go, node, python.
+
+# Core CLI tools
+brew "awscli"
+brew "coreutils"
+brew "curl"
+brew "fd"
+brew "gawk"
+brew "git"
+brew "gh"
+brew "gnupg"
+brew "jq"
+brew "mise"
+brew "ripgrep"
+brew "stow"
+brew "telnet"
+brew "tmux"
+brew "wget"
+
+# Native build dependencies and local dev services
+brew "cocoapods"
+brew "flyctl"
+brew "graphviz"
+brew "groff"
+brew "ios-deploy"
+brew "kerl"
+brew "libpq"
+brew "libyaml"
+brew "lua"
+brew "mkcert"
+brew "mono"
+brew "neovim"
+brew "neovim-qt"
+brew "anomalyco/tap/opencode"
+brew "openssl@3"
+brew "pnpm"
+brew "postgresql@15", restart_service: :changed
+brew "postgresql@17"
+brew "readline"
+brew "unixodbc"
+brew "watchman"
+brew "xz"
+
+# Third-party taps
+brew "mobile-dev-inc/tap/maestro"
+brew "stripe/stripe-cli/stripe"
+
+# Applications
+cask "bitwarden"
+cask "claude-code"
+cask "codex"
+cask "cscreen"
+cask "docker-desktop"
+cask "font-jetbrains-mono-nerd-font"
+cask "ngrok"
+cask "warp"
+cask "zulu@11"
+cask "zulu@17"

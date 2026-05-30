@@ -1,0 +1,11 @@
+[user]
+	name = ProjectCBL
+	email = projectxcbl@gmail.com
+[http]
+	postBuffer = 157286400
+[credential]
+	helper = osxkeychain
+[alias]
+	co = checkout
+[init]
+	defaultbranch = main

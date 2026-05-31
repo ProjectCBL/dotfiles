@@ -49,17 +49,8 @@ backup_target() {
 
   [[ -e "$target" ]] || return 0
 
-  if [[ -d "$target" ]]; then
-    if ! diff -qr "$source" "$target" >/dev/null; then
-      abort "$target exists and differs from $source"
-    fi
-  else
-    if ! cmp -s "$source" "$target"; then
-      abort "$target exists and differs from $source"
-    fi
-  fi
-
   mkdir -p "$BACKUP_DIR$(dirname "$target")"
+  printf "Backing up %s to %s\n" "$target" "$BACKUP_DIR$target"
   mv "$target" "$BACKUP_DIR$target"
 }
 

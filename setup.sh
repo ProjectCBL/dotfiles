@@ -81,14 +81,15 @@ load_homebrew() {
 }
 
 link_stow_packages() {
-  local packages=(zsh git mise)
+  local packages=(zsh git mise neovide)
 
   backup_target "$HOME/.zshrc" "$DOTFILES_DIR/zsh/.zshrc"
   backup_target "$HOME/.zprofile" "$DOTFILES_DIR/zsh/.zprofile"
   backup_target "$HOME/.gitconfig" "$DOTFILES_DIR/git/.gitconfig"
   backup_target "$HOME/.config/mise/config.toml" "$DOTFILES_DIR/mise/dot-config/mise/config.toml"
+  backup_target "$HOME/Library/Application Support/neovide/neovide-settings.json" "$DOTFILES_DIR/neovide/Library/Application Support/neovide/neovide-settings.json"
 
-  log "Linking shell, git, and mise config"
+  log "Linking shell, git, mise, and Neovide config"
   stow --dir "$DOTFILES_DIR" --target "$HOME" --dotfiles --restow "${packages[@]}"
 }
 

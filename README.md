@@ -9,6 +9,7 @@ Personal macOS development setup.
 - Git config via `git/`
 - mise global runtime versions via `mise/`
 - Neovim config via `nvim/`
+- Neovide app settings via `neovide/`
 - Obsidian vault clone during setup
 
 Language runtimes are managed by mise, not Homebrew:
@@ -80,6 +81,11 @@ dotfiles/
     dot-config/
       mise/
         config.toml
+  neovide/
+    Library/
+      Application Support/
+        neovide/
+          neovide-settings.json
   nvim/
 ```
 

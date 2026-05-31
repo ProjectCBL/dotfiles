@@ -42,7 +42,6 @@ brew "neovim-qt"
 brew "anomalyco/tap/opencode"
 brew "openssl@3"
 brew "pnpm"
-brew "postgresql@15", restart_service: :changed
 brew "postgresql@17"
 brew "readline"
 brew "unixodbc"
@@ -55,6 +54,7 @@ brew "stripe/stripe-cli/stripe"
 
 # Applications
 cask "bitwarden"
+cask "neovide"
 cask "claude-code"
 cask "codex"
 cask "cscreen"

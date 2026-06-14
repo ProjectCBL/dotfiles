@@ -1,10 +1,11 @@
 # Dotfiles
 
-Personal macOS development setup.
+Personal development setup for macOS and Linux/Unix systems.
 
 ## What This Manages
 
-- Homebrew packages, casks, taps, and VS Code extensions via `Brewfile`
+- macOS packages, casks, taps, and VS Code extensions via `Brewfile`
+- Linux prerequisites via the local package manager where supported
 - Shell config via `zsh/`
 - Git config via `git/`
 - mise global runtime versions via `mise/`
@@ -38,16 +39,31 @@ Run setup:
 
 The setup script will:
 
-- install Homebrew if needed
-- run `brew bundle`
+- on macOS, install Homebrew if needed and run `brew bundle`
+- on Linux, install `curl`, `git`, `stow`, `zsh`, and `mise` where supported
 - link dotfiles with GNU Stow
 - link Neovim config
-- clone the Obsidian vault if missing
+- clone the Obsidian vault if missing on macOS
 - run `mise install`
+
+On Linux, the Obsidian vault clone is opt-in because private GitHub
+authentication is often not available in headless shell sessions:
+
+```bash
+INSTALL_OBSIDIAN_VAULT=1 ./setup.sh
+```
+
+On NixOS, `mise install` is skipped by default. Several configured runtimes
+build from source or use generic Linux binaries, which requires system-level
+build tools and often `nix-ld`. To force the runtime install:
+
+```bash
+INSTALL_MISE_TOOLS=1 ./setup.sh
+```
 
 ## Dry Run
 
-Check Homebrew packages without installing:
+Check macOS Homebrew packages without installing:
 
 ```bash
 brew bundle check --file ~/dotfiles/Brewfile --no-upgrade --verbose

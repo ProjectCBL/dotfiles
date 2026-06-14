@@ -3,9 +3,12 @@
 	email = projectxcbl@gmail.com
 [http]
 	postBuffer = 157286400
-[credential]
-	helper = osxkeychain
 [alias]
 	co = checkout
 [init]
 	defaultbranch = main
+[include]
+	path = ~/.gitconfig.local
+[safe]
+	directory = /home/projectcbl/dotfiles
+	directory = /home/projectcbl/dotfiles/nvim

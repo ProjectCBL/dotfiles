@@ -1,0 +1,35 @@
+window {
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 18px;
+    background-color: rgba(24, 25, 38, 0.92);
+    color: #cad3f5;
+    font-family: "Inter", "SF Pro Display", "Noto Sans", sans-serif;
+}
+
+#input {
+    margin: 16px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #cad3f5;
+    font-size: 18px;
+}
+
+#inner-box {
+    margin: 0 12px 12px;
+}
+
+#entry {
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+#entry:selected {
+    background-color: rgba(138, 173, 244, 0.28);
+}
+
+#text {
+    color: #cad3f5;
+}

@@ -72,7 +72,9 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
+  source "$ZSH/oh-my-zsh.sh"
+fi
 
 # User configuration
 
@@ -109,27 +111,37 @@ alias kiwichat="cd ~/Documents/KiwiChat"
 export PATH="$HOME/.amplify/bin:$PATH"
 
 # bun completions
-[ -s "/Users/christopherbessette-lee/.bun/_bun" ] && source "/Users/christopherbessette-lee/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-export PATH="$HOME/.asdf/shims/:$PATH"
+[[ -d /opt/homebrew/opt/curl/bin ]] && export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+[[ -d "$HOME/.asdf/shims" ]] && export PATH="$HOME/.asdf/shims:$PATH"
 
 
 
 # android
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tool
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-. "$(brew --prefix asdf)/libexec/asdf.sh"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+else
+  export ANDROID_HOME="$HOME/Android/Sdk"
+fi
+if [[ -d "$ANDROID_HOME" ]]; then
+  export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+fi
+[[ -d /opt/homebrew/opt/postgresql@17/bin ]] && export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+if command -v brew >/dev/null 2>&1 && [[ -r "$(brew --prefix asdf 2>/dev/null)/libexec/asdf.sh" ]]; then
+  . "$(brew --prefix asdf)/libexec/asdf.sh"
+fi
 export RCT_METRO_PORT=8082
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm use --silent default >/dev/null
+if command -v nvm >/dev/null 2>&1; then
+  nvm use --silent default >/dev/null
+fi
 export PATH="$HOME/.local/bin:$PATH"
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"

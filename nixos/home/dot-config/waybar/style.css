@@ -1,0 +1,109 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Inter", "SF Pro Display", "Noto Sans", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(24, 25, 38, 0.64);
+    color: #cad3f5;
+}
+
+window#waybar.top {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+window#waybar.bottom {
+    background: transparent;
+}
+
+window#waybar.dock {
+    background: transparent;
+}
+
+#custom-apple,
+#workspaces,
+#window,
+#pulseaudio,
+#network,
+#clock,
+#tray {
+    padding: 0 10px;
+}
+
+#custom-apple {
+    color: #f4dbd6;
+    font-size: 18px;
+}
+
+#workspaces button {
+    color: #939ab7;
+    padding: 0 6px;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: #8aadf4;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+}
+
+#window {
+    color: #cad3f5;
+}
+
+#pulseaudio,
+#network,
+#clock,
+#tray {
+    color: #cad3f5;
+}
+
+#taskbar {
+    background: rgba(24, 25, 38, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    padding: 8px 12px;
+    transition-property: background-color, border-color, padding;
+    transition-duration: 180ms;
+    transition-timing-function: ease-out;
+}
+
+#taskbar button {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    margin: 0 4px;
+    padding: 7px;
+    min-width: 40px;
+    min-height: 40px;
+    transition-property: background-color, padding, margin, min-width, min-height;
+    transition-duration: 160ms;
+    transition-timing-function: ease-out;
+}
+
+#taskbar button.active {
+    background: rgba(138, 173, 244, 0.28);
+}
+
+#taskbar button:hover {
+    background: rgba(255, 255, 255, 0.14);
+    margin: 0 7px;
+    padding: 11px;
+    min-width: 52px;
+    min-height: 52px;
+}
+
+#taskbar button image {
+    transition-property: -gtk-icon-transform;
+    transition-duration: 160ms;
+    transition-timing-function: ease-out;
+}
+
+#taskbar button:hover image {
+    -gtk-icon-transform: scale(1.24);
+}

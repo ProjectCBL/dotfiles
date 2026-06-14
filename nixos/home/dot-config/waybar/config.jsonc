@@ -1,0 +1,75 @@
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "spacing": 8,
+    "modules-left": ["custom/apple", "hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["pulseaudio", "network", "clock", "tray"],
+    "custom/apple": {
+      "format": "",
+      "tooltip": false
+    },
+    "hyprland/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "urgent": "!",
+        "active": "●",
+        "default": "•"
+      },
+      "persistent-workspaces": {
+        "*": 5
+      }
+    },
+    "hyprland/window": {
+      "format": "{}",
+      "max-length": 72,
+      "separate-outputs": true
+    },
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-muted": "muted",
+      "format-icons": {
+        "default": ["vol", "vol", "vol"]
+      },
+      "on-click": "pulsemixer"
+    },
+    "network": {
+      "format-wifi": "{essid}",
+      "format-ethernet": "wired",
+      "format-disconnected": "offline"
+    },
+    "clock": {
+      "format": "{:%a %b %d  %I:%M %p}",
+      "tooltip-format": "{:%A, %B %d, %Y}"
+    },
+    "tray": {
+      "icon-size": 16,
+      "spacing": 8
+    }
+  },
+  {
+    "name": "dock",
+    "layer": "top",
+    "position": "bottom",
+    "mode": "hide",
+    "start_hidden": true,
+    "exclusive": false,
+    "height": 60,
+    "margin-bottom": 10,
+    "modules-center": ["wlr/taskbar"],
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 32,
+      "tooltip-format": "{title}",
+      "on-click": "activate",
+      "on-click-middle": "close"
+    }
+  }
+]

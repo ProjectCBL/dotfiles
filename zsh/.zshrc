@@ -80,6 +80,9 @@ fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+export EDITOR="nvim"
+export VISUAL="nvim"
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 

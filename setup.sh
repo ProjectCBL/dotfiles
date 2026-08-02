@@ -165,18 +165,19 @@ install_mise() {
 }
 
 link_stow_packages() {
-  local packages=(zsh git)
+  local packages=(zsh git quickshell)
 
   backup_target "$HOME/.zshrc" "$DOTFILES_DIR/zsh/.zshrc"
   backup_target "$HOME/.zprofile" "$DOTFILES_DIR/zsh/.zprofile"
   backup_target "$HOME/.gitconfig" "$DOTFILES_DIR/git/.gitconfig"
+  backup_target "$HOME/.config/quickshell" "$DOTFILES_DIR/quickshell/dot-config/quickshell"
 
   if [[ "$OS_NAME" == "Darwin" && -e "$DOTFILES_DIR/neovide/Library/Application Support/neovide/neovide-settings.json" ]]; then
     backup_target "$HOME/Library/Application Support/neovide/neovide-settings.json" "$DOTFILES_DIR/neovide/Library/Application Support/neovide/neovide-settings.json"
     packages+=(neovide)
   fi
 
-  log "Linking shell, git, and mise config"
+  log "Linking shell, git, Quickshell, and mise config"
   stow --dir "$DOTFILES_DIR" --target "$HOME" --dotfiles --restow "${packages[@]}"
 }
 

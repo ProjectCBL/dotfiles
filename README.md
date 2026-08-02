@@ -11,6 +11,7 @@ Personal development setup for macOS and Linux/Unix systems.
 - mise global runtime versions via `mise/`
 - Neovim config via `nvim/`
 - Neovide app settings via `neovide/`
+- Quickshell config via `quickshell/`
 - Obsidian vault clone during setup
 
 Language runtimes are managed by mise, not Homebrew:
@@ -73,7 +74,7 @@ Preview Stow links:
 
 ```bash
 cd ~/dotfiles
-stow --dotfiles --simulate --verbose zsh git mise
+stow --dotfiles --simulate --verbose zsh git quickshell
 ```
 
 Preview mise installs:
@@ -88,6 +89,10 @@ mise install --dry-run
 dotfiles/
   Brewfile
   setup.sh
+  quickshell/
+    dot-config/
+      quickshell/
+        shell.qml
   zsh/
     .zshrc
     .zprofile

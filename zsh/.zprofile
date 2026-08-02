@@ -5,4 +5,7 @@ elif [[ -x /usr/local/bin/brew ]]; then
 fi
 
 # Language runtimes are managed by mise in ~/.config/mise/config.toml.
+
+export EDITOR="nvim"
+export VISUAL="nvim"
 # mise itself is activated from ~/.zshrc for interactive shells.

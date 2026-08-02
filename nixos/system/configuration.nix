@@ -4,6 +4,28 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  easyEffectsInputPreset = {
+    input = {
+      blocklist = [ ];
+      plugins_order = [ "rnnoise#0" ];
+
+      "rnnoise#0" = {
+        bypass = false;
+        enable-vad = true;
+        input-gain = 0.0;
+        model-path = "";
+        output-gain = 0.0;
+        release = 20.0;
+        vad-thres = 95.0;
+      };
+    };
+  };
+
+  easyEffectsPresetFile =
+    pkgs.writeText "easyeffects-rnnoise-input-preset.json"
+      (builtins.toJSON easyEffectsInputPreset);
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -83,9 +105,11 @@
     open = false;
     modesetting.enable = true;
     nvidiaSettings = true;
+    powerManagement.enable = true;
   };
 
   programs.hyprland.enable = true;
+  programs.zsh.enable = true;
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -112,10 +136,48 @@
   # Enable sound.
   services.pipewire = {
     enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   security.rtkit.enable = true;
+
+  system.activationScripts.easyeffectsPresets.text = ''
+    install -d -m 0755 -o projectcbl -g users /home/projectcbl/.config/easyeffects
+    install -d -m 0755 -o projectcbl -g users /home/projectcbl/.config/easyeffects/input
+    install -d -m 0755 -o projectcbl -g users /home/projectcbl/.config/easyeffects/db
+    chown projectcbl:users /home/projectcbl/.config/easyeffects
+    install -m 0644 -o projectcbl -g users ${easyEffectsPresetFile} /home/projectcbl/.config/easyeffects/input/voice-cancellation.json
+    install -m 0644 -o projectcbl -g users ${easyEffectsPresetFile} /home/projectcbl/.config/easyeffects/input/discord-voice.json
+  '';
+
+  systemd.user.services.easyeffects = {
+    description = "EasyEffects audio processing";
+    after = [
+      "graphical-session.target"
+      "pipewire.service"
+      "pipewire-pulse.service"
+      "wireplumber.service"
+    ];
+    wants = [
+      "graphical-session.target"
+      "pipewire.service"
+      "pipewire-pulse.service"
+      "wireplumber.service"
+    ];
+    wantedBy = [ "graphical-session.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.easyeffects}/bin/easyeffects --gapplication-service";
+      ExecStartPost = "${pkgs.writeShellScript "easyeffects-load-preset" ''
+        sleep 2
+        exec ${pkgs.easyeffects}/bin/easyeffects --load-preset voice-cancellation
+      ''}";
+      Restart = "on-failure";
+    };
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -123,6 +185,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.projectcbl = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
@@ -137,32 +200,38 @@
   environment.systemPackages = with pkgs; [
     gh
     git
+    zsh
     vim     
     wofi
     btop
     wget
     tmux
     grim
+    unzip
     codex
     slurp
     waybar
     neovim
+    easyeffects
     ghostty
     discord
-    wireplumber
     hyprlock
     hypridle
     nwg-look
+    fastfetch
     hyprpaper
     xdg-utils
+    playerctl
+    quickshell
     pulsemixer
     pulseaudio
-    playerctl
+    wireplumber
     wl-clipboard
     bibata-cursors
     papirus-icon-theme
-    swaynotificationcenter
     kdePackages.dolphin
+    kdePackages.gwenview
+    swaynotificationcenter
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
